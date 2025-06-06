@@ -22,6 +22,7 @@ body {
     color: var(--text-color);
     line-height: 1.2;
     overflow: hidden;
+    cursor: url('assets/cursor.png'), auto;
 }
 
 .presentation-container {
@@ -986,3 +987,24 @@ p, h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
     font-size: 1.1rem;
 } 
+
+/* Zoom overlay for diagrams */
+#zoom-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#zoom-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 4px solid var(--accent-color);
+    border-radius: 8px;
+}

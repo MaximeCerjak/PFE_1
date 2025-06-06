@@ -291,4 +291,21 @@ document.addEventListener('DOMContentLoaded', function() {
         showUseCase(0);
     }
 
+    // Zoom overlay for diagrams
+    const zoomOverlay = document.getElementById("zoom-overlay");
+    const zoomImg = zoomOverlay ? zoomOverlay.querySelector("img") : null;
+    document.querySelectorAll(".slide-image-sequence, .slide-image-infra").forEach(img => {
+        img.addEventListener("click", function(e) {
+            if (!zoomOverlay || !zoomImg) return;
+            e.stopPropagation();
+            zoomImg.src = this.src;
+            zoomOverlay.style.display = "flex";
+        });
+    });
+    if (zoomOverlay) {
+        zoomOverlay.addEventListener("click", function() {
+            zoomOverlay.style.display = "none";
+        });
+    }
+
 }); 
