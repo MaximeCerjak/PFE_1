@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramme de séquence</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+        
+        .actor {
+            position: absolute;
+            width: 140px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border: 2px solid #e0e0e0;
+        }
+        
+        .user1 {
+            background: #5856d6;
+            color: white;
+            top: 20px;
+            left: 50px;
+        }
+        
+        .user2 {
+            background: #ff6b6b;
+            color: white;
+            top: 20px;
+            left: 250px;
+        }
+        
+        .server {
+            background: #4ecdc4;
+            color: #333;
+            top: 20px;
+            left: 450px;
+        }
+        
+        .database {
+            background: #45b7d1;
+            color: white;
+            top: 20px;
+            left: 650px;
+        }
+        
+        .user1-bottom {
+            background: #5856d6;
+            color: white;
+            bottom: 20px;
+            left: 50px;
+        }
+        
+        .user2-bottom {
+            background: #ff6b6b;
+            color: white;
+            bottom: 20px;
+            left: 250px;
+        }
+        
+        .server-bottom {
+            background: #4ecdc4;
+            color: #333;
+            bottom: 20px;
+            left: 450px;
+        }
+        
+        .database-bottom {
+            background: #45b7d1;
+            color: white;
+            bottom: 20px;
+            left: 650px;
+        }
+        
+        .lifeline {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, #ddd, #999);
+            border-radius: 2px;
+        }
+        
+        .lifeline1 { left: 117px; top: 80px; height: 440px; }
+        .lifeline2 { left: 317px; top: 80px; height: 440px; }
+        .lifeline3 { left: 517px; top: 80px; height: 440px; }
+        .lifeline4 { left: 717px; top: 80px; height: 440px; }
+        
+        .message {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .arrow {
+            height: 2px;
+            background: #333;
+            position: relative;
+            border-radius: 1px;
+        }
+        
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -1px;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid #333;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        
+        .arrow-dashed {
+            background: repeating-linear-gradient(
+                to right,
+                #666 0px,
+                #666 5px,
+                transparent 5px,
+                transparent 10px
+            );
+            height: 2px;
+        }
+        
+        .arrow-dashed::after {
+            border-left-color: #666;
+        }
+        
+        .message-text {
+            background: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            white-space: nowrap;
+            margin-right: 10px;
+            color: #333;
+        }
+        
+        /* Messages */
+        .msg1 {
+            top: 120px;
+            left: 120px;
+            width: 330px;
+        }
+        
+        .msg2 {
+            top: 160px;
+            left: 450px;
+            width: 200px;
+        }
+        
+        .msg3 {
+            top: 200px;
+            left: 120px;
+            width: 330px;
+        }
+        
+        .msg4 {
+            top: 240px;
+            left: 450px;
+            width: 200px;
+        }
+        
+        .msg5 {
+            top: 280px;
+            left: 120px;
+            width: 330px;
+        }
+        
+        .msg6 {
+            top: 340px;
+            left: 520px;
+            width: 200px;
+        }
+        
+        .msg7 {
+            top: 380px;
+            left: 650px;
+            width: 200px;
+        }
+        
+        .msg8 {
+            top: 420px;
+            left: 450px;
+            width: 200px;
+        }
+        
+        .msg9 {
+            top: 460px;
+            left: 120px;
+            width: 330px;
+        }
+        
+        .reverse {
+            flex-direction: row-reverse;
+        }
+        
+        .reverse .message-text {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+        
+        .reverse .arrow::after {
+            right: auto;
+            left: -1px;
+            border-left: none;
+            border-right: 8px solid #333;
+        }
+        
+        .reverse .arrow-dashed::after {
+            border-right-color: #666;
+            border-left-color: transparent;
+        }
+        
+        .reverse .arrow {
+            transform: scaleX(-1);
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Séquence d'authentification et gestion Canvas</h1>
+        
+        <div class="diagram">
+            <!-- Acteurs du haut -->
+            <div class="actor user1">Utilisateur 1</div>
+            <div class="actor user2">Utilisateur 2</div>
+            <div class="actor server">Serveur Express</div>
+            <div class="actor database">Base de données</div>
+            
+            <!-- Lignes de vie -->
+            <div class="lifeline lifeline1"></div>
+            <div class="lifeline lifeline2"></div>
+            <div class="lifeline lifeline3"></div>
+            <div class="lifeline lifeline4"></div>
+            
+            <!-- Messages -->
+            <div class="message msg1">
+                <div class="message-text">Login (POST /auth)</div>
+                <div class="arrow"></div>
+            </div>
+            
+            <div class="message msg2 reverse">
+                <div class="message-text">JWT Token</div>
+                <div class="arrow-dashed arrow"></div>
+            </div>
+            
+            <div class="message msg3">
+                <div class="message-text">Requête canvas (GET /canvas/:id)</div>
+                <div class="arrow"></div>
+            </div>
+            
+            <div class="message msg4 reverse">
+                <div class="message-text">Données canvas</div>
+                <div class="arrow-dashed arrow"></div>
+            </div>
+            
+            <div class="message msg5">
+                <div class="message-text">Sauvegarde dessin (PUT /canvas/:id)</div>
+                <div class="arrow"></div>
+            </div>
+            
+            <div class="message msg6">
+                <div class="message-text">Enregistrement</div>
+                <div class="arrow"></div>
+            </div>
+            
+            <div class="message msg7 reverse">
+                <div class="message-text">Confirmation</div>
+                <div class="arrow-dashed arrow"></div>
+            </div>
+            
+            <div class="message msg8 reverse">
+                <div class="message-text">Confirmation</div>
+                <div class="arrow-dashed arrow"></div>
+            </div>
+            
+            <div class="message msg9">
+                <div class="message-text">WebSocket (connexion temps réel)</div>
+                <div class="arrow-dashed arrow"></div>
+            </div>
+            
+            <!-- Acteurs du bas -->
+            <div class="actor user1-bottom">Utilisateur 1</div>
+            <div class="actor user2-bottom">Utilisateur 2</div>
+            <div class="actor server-bottom">Serveur Express</div>
+            <div class="actor database-bottom">Base de données</div>
+        </div>
+    </div>
+</body>
+</html>

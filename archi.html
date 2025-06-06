@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Réseau</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+        
+        .diagram {
+            position: relative;
+            width: 100%;
+            height: 1200px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            overflow: visible;
+        }
+        
+        /* Switch principal */
+        .switch {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 10;
+        }
+        
+        /* Câbles réseau */
+        .network-cable {
+            position: absolute;
+            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 5;
+        }
+        
+        .cable1 { top: 150px; left: 150px; }
+        .cable2 { top: 150px; left: 50%; transform: translateX(-50%); }
+        .cable3 { top: 150px; right: 150px; }
+        
+        /* Sections avec bordures */
+        .section {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 15px;
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-label {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            padding: 8px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Section Clients Pi (gauche) */
+        .clients-section {
+            top: 220px;
+            left: 30px;
+            width: 400px;
+            height: 400px;
+            border-color: #3498db;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(52, 152, 219, 0.1) 100%);
+        }
+        
+        .clients-label { color: #3498db; }
+        
+        /* Section Serveurs Pi (droite) */
+        .servers-section {
+            top: 220px;
+            right: 30px;
+            width: 500px;
+            height: 250px;
+            border-color: #e74c3c;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(231, 76, 60, 0.1) 100%);
+        }
+        
+        .servers-label { color: #e74c3c; }
+        
+        /* Section Architecture (gauche bas) */
+        .architecture-section {
+            bottom: 30px;
+            left: 30px;
+            width: 350px;
+            height: 300px;
+            border-color: #27ae60;
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.05) 0%, rgba(39, 174, 96, 0.1) 100%);
+        }
+        
+        .architecture-label { color: #27ae60; }
+        
+        /* Section Monitoring (droite bas) */
+        .monitoring-section {
+            bottom: 30px;
+            right: 30px;
+            width: 600px;
+            height: 400px;
+            border-color: #9b59b6;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.05) 0%, rgba(155, 89, 182, 0.1) 100%);
+        }
+        
+        .monitoring-label { color: #9b59b6; }
+        
+        /* Composants */
+        .component {
+            position: absolute;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+            min-height: 70px;
+            justify-content: center;
+        }
+        
+        .component:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        }
+        
+        .component-icon {
+            font-size: 24px;
+        }
+        
+        /* Clients Pi */
+        .pi-client {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+        
+        .client1 { top: 280px; left: 60px; }
+        .client2 { top: 280px; left: 240px; }
+        .client3 { top: 400px; left: 60px; }
+        .client4 { top: 400px; left: 240px; }
+        .client5 { top: 520px; left: 150px; }
+        
+        /* Serveurs Pi */
+        .pi-server {
+            background: linear-gradient(135deg, #16a085 0%, #1abc9c 100%);
+        }
+        
+        .server1 { top: 290px; right: 380px; }
+        .server2 { top: 290px; right: 220px; }
+        .server3 { top: 290px; right: 60px; }
+        
+        /* Architecture logicielle */
+        .architecture-component {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            width: 280px;
+        }
+        
+        .web-client { bottom: 220px; left: 65px; }
+        .api-server { bottom: 140px; left: 65px; }
+        .database { bottom: 60px; left: 65px; }
+        
+        /* Monitoring */
+        .k8s-component {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            width: 250px;
+        }
+        
+        .monitoring-component {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            width: 200px;
+        }
+        
+        .k8s { bottom: 300px; right: 200px; }
+        .haproxy { bottom: 200px; right: 380px; }
+        .prometheus { bottom: 200px; right: 160px; }
+        .grafana { bottom: 80px; right: 270px; }
+        
+        /* Lignes de connexion */
+        .connection-line {
+            position: absolute;
+            background: #7f8c8d;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        
+        /* Lignes principales depuis le switch */
+        .main-line1 {
+            top: 120px;
+            left: 45%;
+            width: 3px;
+            height: 80px;
+        }
+        
+        .main-line2 {
+            top: 195px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+        }
+        
+        .branch-left {
+            top: 195px;
+            left: 25%;
+            width: 3px;
+            height: 100px;
+        }
+        
+        .branch-right {
+            top: 195px;
+            right: 25%;
+            width: 3px;
+            height: 100px;
+        }
+        
+        /* Connexions vers monitoring */
+        .monitor-conn1 {
+            bottom: 450px;
+            right: 45%;
+            width: 3px;
+            height: 100px;
+        }
+        
+        .monitor-conn2 {
+            bottom: 450px;
+            right: 30%;
+            width: 20%;
+            height: 3px;
+        }
+        
+        /* Connexions architecture */
+        .arch-conn {
+            bottom: 350px;
+            left: 25%;
+            width: 3px;
+            height: 150px;
+        }
+        
+        .icon {
+            font-size: 28px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .diagram { height: 800px; transform: scale(0.8); transform-origin: top center; }
+        }
+        
+        @media (max-width: 1200px) {
+            .diagram { height: 600px; transform: scale(0.6); transform-origin: top center; }
+            .container { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">🏗️ Architecture Réseau Infrastructure</div>
+        
+        <div class="diagram">
+            <!-- Lignes de connexion -->
+            <div class="connection-line main-line1"></div>
+            <div class="connection-line main-line2"></div>
+            <div class="connection-line branch-left"></div>
+            <div class="connection-line branch-right"></div>
+            <div class="connection-line monitor-conn1"></div>
+            <div class="connection-line monitor-conn2"></div>
+            <div class="connection-line arch-conn"></div>
+            
+            <!-- Switch principal -->
+            <div class="switch">
+                <div class="icon">🔀</div>
+                <div>Switch réseau Gigabit</div>
+            </div>
+            
+            <!-- Câbles réseau -->
+            <div class="network-cable cable1">
+                <span>🔌</span>
+                Network_Cable2
+            </div>
+            
+            <div class="network-cable cable2">
+                <span>🔌</span>
+                Network_Cable3
+            </div>
+            
+            <div class="network-cable cable3">
+                <span>🔌</span>
+                Network_Cable1
+            </div>
+            
+            <!-- Section Clients Pi -->
+            <div class="section clients-section">
+                <div class="section-label clients-label">👥 Pi Clients</div>
+            </div>
+            
+            <div class="component pi-client client1">
+                <div class="component-icon">🥧</div>
+                Pi Client 1
+            </div>
+            
+            <div class="component pi-client client2">
+                <div class="component-icon">🥧</div>
+                Pi Client 2
+            </div>
+            
+            <div class="component pi-client client3">
+                <div class="component-icon">🥧</div>
+                Pi Client 3
+            </div>
+            
+            <div class="component pi-client client4">
+                <div class="component-icon">🥧</div>
+                Pi Client ...
+            </div>
+            
+            <!-- Section Serveurs Pi -->
+            <div class="section servers-section">
+                <div class="section-label servers-label">🖥️ Cluster de 10-16 Raspberry Pi</div>
+            </div>
+            
+            <div class="component pi-server server1">
+                <div class="component-icon">🖥️</div>
+                Pi Serveur 1<br><small>(Master)</small>
+            </div>
+            
+            <div class="component pi-server server2">
+                <div class="component-icon">🖥️</div>
+                Pi Serveur 2<br><small>(Backup)</small>
+            </div>
+            
+            <div class="component pi-server server3">
+                <div class="component-icon">🖥️</div>
+                Pi Serveur 3<br><small>(Backup)</small>
+            </div>
+            
+            <!-- Section Architecture Logicielle -->
+            <div class="section architecture-section">
+                <div class="section-label architecture-label">💻 Architecture Logicielle</div>
+            </div>
+            
+            <div class="component architecture-component web-client">
+                <div class="component-icon">⚛️</div>
+                Client Web (React + Phaser)
+            </div>
+            
+            <div class="component architecture-component api-server">
+                <div class="component-icon">🚀</div>
+                Serveur Express API REST/WebSocket
+            </div>
+            
+            <div class="component architecture-component database">
+                <div class="component-icon">🗄️</div>
+                Base de données locale (Stockage d'assets)
+            </div>
+            
+            <!-- Section Monitoring -->
+            <div class="section monitoring-section">
+                <div class="section-label monitoring-label">☸️ Redondance et Monitoring</div>
+            </div>
+            
+            <div class="component k8s-component k8s">
+                <div class="component-icon">☸️</div>
+                K3s (Kubernetes léger)
+            </div>
+            
+            <div class="component monitoring-component haproxy">
+                <div class="component-icon">⚖️</div>
+                HAProxy<br><small>(Équilibrage de charge)</small>
+            </div>
+            
+            <div class="component monitoring-component prometheus">
+                <div class="component-icon">📊</div>
+                Prometheus<br><small>(Monitoring)</small>
+            </div>
+            
+            <div class="component monitoring-component grafana">
+                <div class="component-icon">📈</div>
+                Grafana<br><small>(Tableau de bord)</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.component, .switch, .network-cable, .section');
+            elements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform += ' scale(0.8)';
+                
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease';
+                    element.style.opacity = '1';
+                    element.style.transform = element.style.transform.replace('scale(0.8)', 'scale(1)');
+                }, index * 80);
+            });
+            
+            // Animation des lignes de connexion
+            setTimeout(() => {
+                const lines = document.querySelectorAll('.connection-line');
+                lines.forEach((line, index) => {
+                    line.style.opacity = '0';
+                    setTimeout(() => {
+                        line.style.transition = 'opacity 0.8s ease';
+                        line.style.opacity = '1';
+                    }, index * 200);
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

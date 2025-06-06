@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Drifter: Aventure Pixel Art</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="presentation-container">
+        <div id="slide-container">
+            <!-- Slide 1: Page de garde -->
+            <div id="slide-0" class="slide active">
+                <div class="slide-content">
+                    <div class="cover-slide">
+                        <h1 class="slide-title">Digital Drifter</h1>
+                        <p class="slide-subtitle">Une aventure Pixel Art RPG</p>
+                        <div class="pixel-divider"></div>
+                        <p class="slide-text p-pres">Plateforme immersive dédiée à la création artistique et à la relation entre les étudiants et le corps enseignant</p>
+                        <p class="slide-date">Juin 2025</p>
+                        <div class="pixel-divider"></div>
+                        <p class="slide-text">Maxime Cerjak</p>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 2: Sommaire -->
+            <div id="slide-1" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Sommaire</h2>
+                    <div class="toc-container">
+                        <div class="toc-column">
+                            <ol class="toc-list">
+                                <li class="toc-item" data-target="2">Introduction</li>
+                                <li class="toc-item" data-target="3">Parties prenantes</li> <!-- ajouter les acteurs, développeurs, architectes, graphistes, ajouter une slide pour séparer acteurs et bénéficiaires C1.1.1 -->
+                                <!-- ajouter une slide présentation de la demande du commanditaire C1.1.2 -->
+                                <li class="toc-item" data-target="4">Besoins et enjeux</li> 
+                                <li class="toc-item" data-target="5">Analyse SWOT</li>
+                                <!-- ajouter une slide, cartographie des risques techniques et fonctionnels priorisé dans un référentiel (perte de données, interruption système, sécurité, facteurs de dégradations, etc) C1.2.3 -->
+                                <li class="toc-item" data-target="6">User Stories</li>
+                                <!-- ajouter une slide, diagnostique dces infrastructures en place avant le projet + besoins nbr d'utilisateurs prévus, volumes de données, délais de livraison, ressources, etc. C1.2.2 -->
+                                <li class="toc-item" data-target="7">Choix techniques</li> <!-- àjouter le choix de bdd -->
+                                <li class="toc-item" data-target="8">Architecture technique et infrastructure</li>
+                            </ol>
+                        </div>
+                        <div class="toc-column">
+                            <ol class="toc-list toc-list-second">
+                                <li class="toc-item" data-target="9">Diagramme de séquence</li>
+                                <li class="toc-item" data-target="10">Cas d'usage</li>
+                                <li class="toc-item" data-target="11">Macro-chiffrage</li> <!-- à développer plus en détails, nécessite peut une deuxième slide pour diagramme de fonctionnalités, charge de travail en jour/homme -->
+                                <li class="toc-item" data-target="12">Démonstration</li> <!-- à supprimer, pas dans le bloc 1 -->
+                                <li class="toc-item" data-target="13">Veille & Innovation</li> <!-- à développer plus en détails, nécessite peut être une deuxième slide -->
+                                <li class="toc-item" data-target="14">Conclusion</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="pixel-divider"></div>
+                    <p class="navigation-hint">Utilisez les flèches ← → ou les boutons pour naviguer</p>
+                </div>
+            </div>
+
+            <!-- Slide 3: Introduction -->
+            <div id="slide-2" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Introduction</h2>
+                    <div class="slide-text">
+                        <p class="p-intro">Une expérience artistique immersive et ludique</p>
+                        <div class="pixel-divider-intro"></div>
+                        <ul class="slide-list list-intro">
+                            <li>Univers en Pixel Art inspiré des RPG fantasy classiques</li>
+                            <li>Plateforme autonome sur cluster Raspberry Pi sans dépendance Internet</li>
+                            <li>Espace de création, collaboration et exposition pédagogique</li>
+                            <li>Approche "learning by doing" pour l'apprentissage artistique</li>
+                        </ul>
+                    </div>
+                    <img src="assets/plaine.png" alt="Logo" class="plaine">
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 4: Parties prenantes -->
+            <div id="slide-3" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Parties prenantes</h2>
+                    <div class="slide-columns">
+                        <div class="slide-column">
+                            <img src="assets/student.png" alt="Étudiant" class="persona">
+                            <h3 class="slide-subtitle">Étudiants</h3>
+                            <ul class="slide-list">
+                                <li>18-70 ans, passionnés d'arts plastiques</li>
+                                <li>Besoins: explorer leur créativité, partager leurs œuvres</li>
+                                <li>Freins: compétences techniques limitées ou novices dans le numérique</li>
+                            </ul>
+                        </div>
+                        <div class="slide-column">
+                            <img src="assets/prof.png" alt="Enseignant" class="persona">
+                            <h3 class="slide-subtitle">Enseignants</h3>
+                            <ul class="slide-list">
+                                <li>Artistes confirmés, pédagogues</li>
+                                <li>Besoins: outil ludique d'enseignement, organisation d'expositions</li>
+                                <li>Freins: temps d'apprentissage de la plateforme</li>
+                            </ul>
+                        </div>
+                        <div class="slide-column">
+                            <img src="assets/admin.png" alt="Administrateur" class="persona">
+                            <h3 class="slide-subtitle">Administrateurs</h3>
+                            <ul class="slide-list">
+                                <li>Spécialistes informatiques</li>
+                                <li>Besoins: système fiable, peu gourmand</li>
+                                <li>Freins: budgets limités, sécurité réseau</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 5: Besoins et enjeux -->
+            <div id="slide-4" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Besoins et enjeux</h2>
+                    <div class="slide-text slide-text-besoins">
+                        <div class="slide-section">
+                            <h3 class="slide-subtitle">Besoins identifiés</h3>
+                            <ul class="slide-list">
+                                <li>Créatifs: espace d'expression artistique intuitif</li>
+                                <li>Pédagogiques: apprentissage par la pratique, collaboration</li>
+                                <li>Relationnel: permettre les échanges entre étudiants et enseignants</li>
+                                <li>Techniques: solution matérielle fiable et économique</li>
+                            </ul>
+                        </div>
+                        <div class="slide-section">
+                            <h3 class="slide-subtitle">Enjeux majeurs</h3>
+                            <ul class="slide-list">
+                                <li>Ludification de l'apprentissage artistique</li>
+                                <li>Autonomie technique (indépendance d'Internet)</li>
+                                <li>Écologie et durabilité (faible empreinte)</li>
+                                <li>Développement de compétences collaboratives</li>
+                                <li>Création d'un espace de partage et d'échange</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 6: Analyse SWOT -->
+            <div id="slide-5" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Analyse SWOT</h2>
+                    <table>
+                        <tr>
+                            <th>Forces</th>
+                            <th>Faiblesses</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul class="compact-list">
+                                    <li>Innovation pédagogique ludique</li>
+                                    <li>Empreinte écologique réduite</li>
+                                    <li>Contrôle total des données</li>
+                                    <li>Coût matériel abordable</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="compact-list">
+                                    <li>Puissance limitée des Pi</li>
+                                    <li>Maintenance technique requise</li>
+                                    <li>Utilisation restreinte au réseau local</li>
+                                    <li>Courbe d'apprentissage initiale</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Opportunités</th>
+                            <th>Menaces</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <ul class="compact-list">
+                                    <li>Showcase des œuvres étudiantes</li>
+                                    <li>Modularité et extension du cluster</li>
+                                    <li>Transversalité des apprentissages</li>
+                                    <li>Tendance pixel art en hausse</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul class="compact-list">
+                                    <li>Pannes matérielles (mitigé par redondance)</li>
+                                    <li>Obsolescence technologique des Pi</li>
+                                    <li>Désengagement des utilisateurs</li>
+                                    <li>Sécurité réseau interne</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 7: User Stories -->
+            <div id="slide-6" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">User Stories</h2>
+                    <div class="slide-text">
+                        <div class="user-story">
+                            <h3 class="character-name">Étudiant artiste</h3>
+                            <p>"En tant qu'étudiant, je veux accéder à un espace numérique original et ludique pour créer des œuvres en pixel art ou uploader des oeuvres numérisées pour les partager avec mes camarades sous forme d'expositions virtuelles."</p>
+                        </div>
+                        <div class="user-story">
+                            <h3 class="character-name">Enseignant d'art</h3>
+                            <p>"En tant qu'enseignant, je veux pouvoir assister aux expositions virtuelles de mes étudiants et communiquer avec eux."</p>
+                        </div>
+                        <div class="user-story">
+                            <h3 class="character-name">Administrateur technique</h3>
+                            <p>"En tant qu'administrateur, je veux une plateforme fiable, autonome et écologique qui fonctionne sans connexion internet et reste facile à maintenir avec un budget limité."</p>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 8: Choix techniques -->
+            <div id="slide-7" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Choix techniques</h2>
+                    <div class="slide-text">
+                        <table>
+                            <tr>
+                                <th>Technologie</th>
+                                <th>Justification</th>
+                            </tr>
+                            <tr>
+                                <td>Cluster Raspberry Pi</td>
+                                <td>Faible consommation (3-5W/unité), coût modéré, flexibilité pour réseau local isolé</td>
+                            </tr>
+                            <tr>
+                                <td>React / Phaser</td>
+                                <td>Interface web dynamique, moteur de jeu 2D HTML5 optimisé pour le pixel art</td>
+                            </tr>
+                            <tr>
+                                <td>Node.js / Express</td>
+                                <td>Serveur léger, adapté aux ressources limitées, pile JavaScript unifiée</td>
+                            </tr>
+                        </table>
+                        <p class="slide-text">Impact écologique: 2 à 12 kg CO₂/an par Raspberry Pi contre 170-250 kg/an pour un PC standard 
+                        <p class="slide-text">Sources: </p>
+                        <ul class="slide-list">
+                            <li>https://easyrecyclage.com/empreinte-ecologique/</li>
+                            <li>https://pidora.ca/powering-your-raspberry-pi-7-tips-to-cut-energy-use-costs/</li>
+                        </ul>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 9: Architecture technique -->
+            <div id="slide-8" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Architecture technique et infrastructure</h2>
+                    <div class="slide-text">
+                        <div class="architecture-diagram">
+                            <img src="assets/infra.png" alt="Architecture technique" class="slide-image-infra">
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 10: Diagramme de séquence -->
+            <div id="slide-9" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Diagramme de séquence</h2>
+                    <div class="slide-text">
+                        <img src="assets/sequence.png" alt="Diagramme de séquence" class="slide-image-sequence">
+                        <p class="slide-text">Scénario: création collaborative d'une œuvre pixel art</p>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 11: Cas d'usage -->
+            <div id="slide-10" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Cas d'usage principaux</h2>
+                    <div class="slide-text use-case-container">
+                        <div class="use-case">
+                            <h3 class="slide-subtitle">Création d'œuvres</h3>
+                            <p>Éditeur pixel art intégré basé sur Phaser permettant de dessiner et animer, seul ou en collaboration</p>
+                            <img src="assets/editor.png" alt="Création d'œuvres" class="slide-image">
+                        </div>
+                        <div class="use-case">
+                            <h3 class="slide-subtitle">Exploration d'univers</h3>
+                            <p>Navigation dans un monde immersif en pixel art pour découvrir ses créations et celles des autres</p>
+                            <img src="assets/chat-preview.png" alt="Exploration d'univers" class="slide-image">
+                        </div>
+                        <div class="use-case">
+                            <h3 class="slide-subtitle">Exposition virtuelle</h3>
+                            <p>Galerie interactive pour organiser et admirer les travaux avec commentaires et annotations</p>
+                            <img src="assets/expo.png" alt="Exposition virtuelle" class="slide-image">
+                        </div>
+                        <div class="use-case">
+                            <h3 class="slide-subtitle">Énigmes pédagogiques</h3>
+                            <p>Mini-jeux dans l'univers pour renforcer les apprentissages artistiques (théorie des couleurs, etc.)</p>
+                            <img src="assets/puzzle.png" alt="Énigmes pédagogiques" class="slide-image">
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 12: Macro-chiffrage -->
+            <div id="slide-11" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Macro-chiffrage</h2>
+                    <div class="slide-text">
+                        <table>
+                            <tr>
+                                <th>Poste</th>
+                                <th>Coût</th>
+                            </tr>
+                            <tr>
+                                <td>10 Raspberry Pi 5 (8Go)</td>
+                                <td>≈ 760 €</td>
+                            </tr>
+                            <tr>
+                                <td>Équipement réseau et stockage</td>
+                                <td>≈ 240 €</td>
+                            </tr>
+                            <tr>
+                                <td>Électricité annuelle</td>
+                                <td>≈ 56-88 €/an</td>
+                            </tr>
+                            <tr>
+                                <td>Maintenance</td>
+                                <td>≈ 50-100 €/an</td>
+                            </tr>
+                        </table>
+                        <p>Coût par poste: 100-150€ de matériel + 10€/an (électricité et maintenance)</p>
+                        <p>Budget total initial: ≈ 1000€ (contre plusieurs milliers pour des PC classiques)</p>
+                        <p>Coût annuel global: ≈ 150€ (5-10% du coût matériel)</p>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 13: Démonstration -->
+            <div id="slide-12" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Démonstration</h2>
+                    <div class="slide-text">
+                        <p>Aperçu des fonctionnalités clés de Digital Drifter</p>
+                        <div class="demo-screenshots">
+                            <div class="demo-item">
+                                <h3 class="slide-subtitle">Accueil et Navigation</h3>
+                                <p>Interface principale inspirée des RPG 16-bit classiques</p>
+                            </div>
+                            <div class="demo-item">
+                                <h3 class="slide-subtitle">Éditeur Pixel Art</h3>
+                                <p>Outils complets de création avec palette, calques et animations</p>
+                            </div>
+                            <div class="demo-item">
+                                <h3 class="slide-subtitle">Galerie d'exposition</h3>
+                                <p>Espace muséal virtuel avec parcours thématiques</p>
+                            </div>
+                            <div class="demo-item">
+                                <h3 class="slide-subtitle">Interaction sociale</h3>
+                                <p>Chat, commentaires et collaboration temps réel</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 14: Veille & Innovation -->
+            <div id="slide-13" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Veille & Innovation</h2>
+                    <div class="slide-text">
+                        <div class="slide-section">
+                            <h3 class="slide-subtitle">Innovations techniques</h3>
+                            <ul class="slide-list">
+                                <li>Cluster Raspberry Pi à faible empreinte carbone: réduction de 95% des émissions</li>
+                                <li>Infrastructure scalable: ajout progressif de nœuds selon les besoins</li>
+                                <li>Intégration Phaser/React pour rendu optimisé du pixel art</li>
+                            </ul>
+                        </div>
+                        <div class="slide-section">
+                            <h3 class="slide-subtitle">Innovations pédagogiques</h3>
+                            <ul class="slide-list">
+                                <li>Gameplay narratif intégré pour contextualiser l'apprentissage</li>
+                                <li>Ludification des activités artistiques par quêtes et énigmes</li>
+                                <li>Exposition virtuelle pour valorisation des créations</li>
+                            </ul>
+                        </div>
+                        <div class="slide-section">
+                            <h3 class="slide-subtitle">Sources de veille</h3>
+                            <p>Documentation Phaser, forums Raspberry Pi, blogs spécialisés pixel art, études sur l'apprentissage ludique</p>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+
+            <!-- Slide 15: Conclusion -->
+            <div id="slide-14" class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Conclusion</h2>
+                    <div class="slide-text">
+                        <p>Digital Drifter: une aventure artistique et pédagogique innovante</p>
+                        <div class="pixel-divider"></div>
+                        <ul class="slide-list">
+                            <li>Approche novatrice: apprentissage artistique par immersion RPG</li>
+                            <li>Solution économique et écologique: cluster Raspberry Pi optimisé</li>
+                            <li>Expérience utilisateur complète: création, exposition, collaboration</li>
+                            <li>Autonomie technique totale: fonctionnement sans dépendance externe</li>
+                        </ul>
+                        <div class="pixel-divider"></div>
+                        <div class="roadmap">
+                            <h3 class="slide-subtitle">Feuille de route</h3>
+                            <ul class="slide-list">
+                                <li>Prototype interne: T3 2023</li>
+                                <li>Tests utilisateurs: T4 2023</li>
+                                <li>Itérations et améliorations: T1 2024</li>
+                                <li>Déploiement complet: T2 2024</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="menu-btn" title="Retour au sommaire" data-target="1">☰</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="prev-btn" class="control-btn">←</button>
+            <div id="slide-indicator">1/15</div>
+            <button id="next-btn" class="control-btn">→</button>
+            <button id="fullscreen-btn" class="control-btn" title="Mode plein écran">⛶</button>
+        </div>
+    </div>
+
+    <!-- Sons de l'interface -->
+    <audio id="sound-click" preload="auto"></audio>
+    <audio id="sound-menu" preload="auto"></audio>
+    <audio id="sound-select" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html> 
