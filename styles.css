@@ -22,7 +22,17 @@ body {
     color: var(--text-color);
     line-height: 1.2;
     overflow: hidden;
-    cursor: url('assets/cursor.png'), auto;
+    cursor: url('/presentation_dd/pixel_prez/assets/cursor.png') 0 0, auto;
+}
+
+/* Assurer que le curseur personnalisé s'applique sur les éléments interactifs */
+button, 
+.control-btn,
+.toc-item,
+.menu-btn,
+.slide-image-sequence,
+.slide-image-infra {
+    cursor: url('/presentation_dd/pixel_prez/assets/cursor.png') 0 0, pointer;
 }
 
 .presentation-container {
@@ -129,6 +139,13 @@ body {
     letter-spacing: 1px;
     text-align: center;
     font-family: 'Press Start 2P', cursive;
+    white-space: normal;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+    max-width: 100%;
+    padding: 0 1rem;
 }
 
 /* Sous-titres des slides */
