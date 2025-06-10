@@ -22,17 +22,16 @@ body {
     color: var(--text-color);
     line-height: 1.2;
     overflow: hidden;
-    cursor: url('/presentation_dd/pixel_prez/assets/cursor.png') 0 0, auto;
 }
 
-/* Assurer que le curseur personnalisé s'applique sur les éléments interactifs */
+/* Style spécifique pour les éléments interactifs */
 button, 
 .control-btn,
 .toc-item,
 .menu-btn,
 .slide-image-sequence,
 .slide-image-infra {
-    cursor: url('/presentation_dd/pixel_prez/assets/cursor.png') 0 0, pointer;
+    cursor: url('assets/cursor.png') 0 0, pointer !important;
 }
 
 .presentation-container {
@@ -46,6 +45,7 @@ button,
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    cursor: url('assets/cursor.png') 0 0, auto;
 }
 
 /* Conteneur des slides */
@@ -158,6 +158,12 @@ button,
 }
 
 /* Texte normal dans les slides */
+.slide:not(#slide-18) .slide-text {
+    font-size: 1.7rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.2;
+}
+
 .slide-text {
     font-size: 1.5rem;
     margin-bottom: 0.7rem;
@@ -208,6 +214,14 @@ button,
     padding-left: 0.5rem;
 }
 
+.slide:not(#slide-18) .slide-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 1.6rem;
+    line-height: 1.2;
+}
+
 .slide-list li {
     margin-bottom: 0.5rem;
     position: relative;
@@ -224,6 +238,14 @@ button,
 }
 
 /* Tableaux */
+.slide:not(#slide-18) table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 1.4rem;
+    table-layout: fixed;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -447,7 +469,7 @@ td {
     color: var(--text-color);
     font-family: 'VT323', monospace;
     box-shadow: 0 2px 6px #2228;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     width: 100%;
     margin: auto 0;
 }
@@ -542,18 +564,18 @@ td {
 }
 
 /* Liste compacte pour les tableaux */
+.slide:not(#slide-18) .compact-list {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
 .compact-list {
     list-style-type: none;
     padding-left: 0;
     font-size: 1.4rem;
     margin: 0;
-}
-
-.compact-list li {
-    margin-bottom: 0.6rem;
-    position: relative;
-    padding-left: 1rem;
-    line-height: 1.4;
 }
 
 .compact-list li::before {
@@ -571,22 +593,24 @@ td {
     margin: 1.5rem 0;
     flex: 1; /* Prend tout l'espace disponible */
     overflow-y: auto;
+    counter-reset: item;
 }
 
 .toc-column {
     flex: 1;
+    padding: 0 0.5rem;
 }
 
 .toc-list {
     list-style-type: none;
     list-style: none;
     padding-left: 0;
-    counter-reset: item;
     margin: 0;
 }
 
 .toc-list li {
     margin-bottom: 0.6rem;
+    margin-left: 5px;
     position: relative;
     font-size: 1.6rem;
     padding: 0.4rem;
@@ -700,7 +724,7 @@ td {
     color: var(--text-color);
     font-family: 'VT323', monospace;
     box-shadow: 0 2px 6px #2228;
-    font-size: 1.25rem;
+    font-size: 1.45rem;
     width: 100%;
     max-width: 750px;
     margin: 0 auto 1.5rem auto;
@@ -1024,4 +1048,296 @@ p, h1, h2, h3, h4, h5, h6 {
     max-height: 90%;
     border: 4px solid var(--accent-color);
     border-radius: 8px;
+}
+
+/* Styles pour les sections du sommaire */
+.toc-section {
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.toc-header {
+    background-color: var(--border-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+.toc-header:after {
+    content: '▼';
+    font-size: 0.6rem;
+    transition: transform 0.3s ease;
+}
+
+.toc-header.collapsed:after {
+    transform: rotate(-90deg);
+}
+
+.toc-header:hover {
+    background-color: var(--hover-color);
+}
+
+.toc-list {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.toc-section.active .toc-list {
+    height: auto;
+    padding: 0.5rem;
+}
+
+.toc-item {
+    margin: 0.3rem 0;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    list-style-type: none;
+}
+
+.toc-item:hover {
+    background-color: var(--hover-color);
+}
+
+.phase-1 { 
+    background-color: #b2e8b2; 
+}
+.phase-2 { 
+    background-color: #dacb9b; 
+}
+.phase-3 { 
+    background-color: #daa3a8; 
+}
+.phase-legend { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    font-family: 'Press Start 2P', cursive;
+}
+
+/* Info-bulle sur ligne de tableau */
+tr[data-tooltip] {
+    position: relative;
+    cursor: help;
+}
+
+tr[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--container-bg);
+    color: var(--accent-color);
+    padding: 0.5rem 0.8rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    border: 2px solid var(--border-color);
+    z-index: 100;
+    width: max-content;
+    max-width: 90%;
+    box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.phase td::after {
+    display: block;
+    min-width: 350px;
+    content: attr(data-phase);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--container-bg);
+    color: var(--accent-color);
+    padding: 0.5rem 0.8rem;
+    opacity: 0;
+}
+
+.phase td:hover::after {
+    opacity: 1;
+    z-index: 1000;
+}
+
+/* Adaptation pour grands écrans (vidéoprojecteur) */
+@media screen and (min-width: 1920px) {
+    .slide-title {
+        font-size: 2.5rem;
+    }
+
+    .slide-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .slide:not(#slide-18) .slide-text {
+        font-size: 2rem;
+    }
+
+    .slide-text {
+        font-size: 1.8rem;
+    }
+
+    .slide:not(#slide-18) .slide-list li {
+        font-size: 1.9rem;
+    }
+
+    .slide-list li {
+        font-size: 1.7rem;
+    }
+
+    .slide:not(#slide-18) table {
+        font-size: 1.7rem;
+    }
+
+    table {
+        font-size: 1.5rem;
+    }
+
+    .slide:not(#slide-18) .compact-list {
+        font-size: 1.9rem;
+    }
+
+    .compact-list {
+        font-size: 1.7rem;
+    }
+
+    .slide:not(#slide-18) .user-story.with-avatar {
+        font-size: 1.8rem;
+    }
+
+    .user-story.with-avatar {
+        font-size: 1.6rem;
+    }
+
+    .slide:not(#slide-18) .use-case {
+        font-size: 1.75rem;
+    }
+
+    .use-case {
+        font-size: 1.55rem;
+    }
+
+    .toc-list li {
+        font-size: 1.8rem;
+    }
+
+    .toc-header {
+        font-size: 1.7rem;
+    }
+
+    #slide-indicator {
+        font-size: 1.6rem;
+    }
+
+    .control-btn {
+        font-size: 1.3rem;
+        padding: 0.6rem 1rem;
+    }
+
+    #fullscreen-btn {
+        font-size: 1.6rem;
+    }
+}
+
+/* Pour les très grands écrans */
+@media screen and (min-width: 2560px) {
+    .slide-title {
+        font-size: 3rem;
+    }
+
+    .slide-subtitle {
+        font-size: 2rem;
+    }
+
+    .slide:not(#slide-18) .slide-text {
+        font-size: 2.3rem;
+    }
+
+    .slide-text {
+        font-size: 2.1rem;
+    }
+
+    .slide:not(#slide-18) .slide-list li {
+        font-size: 2.2rem;
+    }
+
+    .slide-list li {
+        font-size: 2rem;
+    }
+
+    .slide:not(#slide-18) table {
+        font-size: 2rem;
+    }
+
+    table {
+        font-size: 1.8rem;
+    }
+
+    .slide:not(#slide-18) .compact-list {
+        font-size: 2.2rem;
+    }
+
+    .compact-list {
+        font-size: 2rem;
+    }
+
+    .slide:not(#slide-18) .user-story.with-avatar {
+        font-size: 2.1rem;
+    }
+
+    .user-story.with-avatar {
+        font-size: 1.9rem;
+    }
+
+    .slide:not(#slide-18) .use-case {
+        font-size: 2.05rem;
+    }
+
+    .use-case {
+        font-size: 1.85rem;
+    }
+
+    .toc-list li {
+        font-size: 2.1rem;
+    }
+
+    .toc-header {
+        font-size: 2rem;
+    }
+
+    #slide-indicator {
+        font-size: 1.9rem;
+    }
+
+    .control-btn {
+        font-size: 1.6rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    #fullscreen-btn {
+        font-size: 1.9rem;
+    }
 }

@@ -308,4 +308,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Gestion des sections du sommaire
+    function initializeTOC() {
+        // Initialiser toutes les sections comme fermées
+        document.querySelectorAll('.toc-section').forEach(section => {
+            section.classList.remove('active');
+            const header = section.querySelector('.toc-header');
+            if (header) {
+                header.classList.add('collapsed');
+            }
+        });
+
+        // Ouvrir la première section
+        const firstSection = document.querySelector('.toc-section');
+        if (firstSection) {
+            firstSection.classList.add('active');
+            const header = firstSection.querySelector('.toc-header');
+            if (header) {
+                header.classList.remove('collapsed');
+            }
+        }
+
+        // Gérer les clics sur les en-têtes
+        document.querySelectorAll('.toc-header').forEach(header => {
+            header.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const section = this.parentElement;
+                const wasActive = section.classList.contains('active');
+
+                // Fermer toutes les sections
+                document.querySelectorAll('.toc-section').forEach(s => {
+                    s.classList.remove('active');
+                    const h = s.querySelector('.toc-header');
+                    if (h) h.classList.add('collapsed');
+                });
+
+                // Basculer l'état de la section cliquée
+                if (!wasActive) {
+                    section.classList.add('active');
+                    this.classList.remove('collapsed');
+                    if (typeof playMenuSound === 'function') {
+                        playMenuSound();
+                    }
+                }
+            });
+        });
+
+        // Gérer les clics sur les éléments de la liste
+        document.querySelectorAll('.toc-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const targetSlide = this.getAttribute('data-target');
+                if (targetSlide) {
+                    showSlide(parseInt(targetSlide));
+                    if (typeof playSelectSound === 'function') {
+                        playSelectSound();
+                    }
+                }
+            });
+        });
+    }
+
+    initializeTOC();
 }); 
