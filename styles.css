@@ -159,13 +159,13 @@ button,
 
 /* Texte normal dans les slides */
 .slide:not(#slide-18) .slide-text {
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     margin-bottom: 0.7rem;
     line-height: 1.2;
 }
 
 .slide-text {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-bottom: 0.7rem;
     line-height: 1.2;
 }
@@ -174,14 +174,31 @@ button,
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
+    gap: 2rem;
+}
+
+.slide-text-besoins .slide-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.slide-text-besoins .slide-image-veille {
+    max-height: 120px;
+    height: 100%;
+    margin: 1rem auto;
+    border-radius: 8px;
+}
+
+.slide-text-besoins .slide-list {
+    width: 100%;
+    text-align: left;
 }
 
 .slide-text-besoins .slide-subtitle {
     margin-bottom: 1.6rem;
-}
-
-.slide-text-besoins .slide-list {
-    max-width: 95%;
 }
 
 .slide-text-besoins .slide-list li {
@@ -892,6 +909,13 @@ p, h1, h2, h3, h4, h5, h6 {
     display: block;
 }
 
+.slide-image-veille {
+    max-height: 70px;
+    height: 100%;
+    margin: 1rem auto 0 auto;
+    border-radius: 8px;
+}
+
 .toc-list-second {
     counter-reset: item 7; /* Commence la numérotation à 8 (7+1) */
 }
@@ -1165,7 +1189,7 @@ tr[data-tooltip]::after {
 
 .phase td::after {
     display: block;
-    min-width: 350px;
+    min-width: 280px;
     content: attr(data-phase);
     position: absolute;
     bottom: 100%;
