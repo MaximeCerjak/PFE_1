@@ -31,6 +31,7 @@
 
             <!-- Slide 2: Sommaire -->
             <div id="slide-1" class="slide">
+                <button id="qr-toggle-btn" class="qr-btn" title="Voir sur smartphone">📱</button>
                 <div class="slide-content">
                     <h2 class="slide-title">Sommaire</h2>
                     <div class="toc-container">
@@ -81,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>               
             </div>
 
             <!-- Slide 3: Introduction -->
@@ -846,6 +847,15 @@
             <div id="slide-indicator">1/20</div>
             <button id="next-btn" class="control-btn">→</button>
             <button id="fullscreen-btn" class="control-btn" title="Mode plein écran">⛶</button>
+            <!-- Overlay de la popup QR Code -->
+            <div id="qr-popup-overlay" class="qr-popup-overlay">
+                <div class="qr-popup-box">
+                    <span class="qr-close-btn">✖</span>
+                    <h3>Ouvrir le sommaire sur smartphone</h3>
+                    <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tonsite.com/sommaire-mobile" alt="QR Code vers le sommaire mobile">
+                    <p>Scannez ce QR code avec votre téléphone</p>
+                </div>
+            </div> 
         </div>
     </div>
 

@@ -374,4 +374,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     initializeTOC();
+
+    const qrBtn = document.getElementById('qr-toggle-btn');
+    const qrOverlay = document.getElementById('qr-popup-overlay');
+    const qrClose = document.querySelector('.qr-close-btn');
+
+    if (qrBtn && qrOverlay && qrClose) {
+        qrBtn.addEventListener('click', () => {
+            qrOverlay.style.display = 'flex';
+        });
+
+        qrClose.addEventListener('click', () => {
+            qrOverlay.style.display = 'none';
+        });
+
+        qrOverlay.addEventListener('click', (e) => {
+            if (e.target === qrOverlay) {
+                qrOverlay.style.display = 'none';
+            }
+        });
+    }
 }); 
