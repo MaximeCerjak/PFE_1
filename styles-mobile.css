@@ -1,0 +1,150 @@
+:root {
+    /* Palette de couleurs style Nintendo */
+    --primary-color: #1a5f2a;    /* Vert Nintendo */
+    --secondary-color: #e8604c;  /* Rouge-orange Nintendo */
+    --accent-color: #ffd700;     /* Jaune or */
+    --text-color: #f8f8f8;       /* Blanc cassé */
+    --container-bg: rgba(40, 55, 66, 0.92); /* Fond bleu foncé légèrement transparent */
+    --border-color: #8b4513;     /* Marron bois */
+    --btn-hover: #ffc107;        /* Jaune ambre au survol */
+    --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: #000;
+    color: var(--text-color);
+    line-height: 1.2;
+    padding: 1rem;
+    background: url('background.png') repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+.toc-section {
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--container-bg);
+    overflow: hidden;
+}
+
+.toc-header {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+    padding: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+ul {
+    list-style: none;
+    padding: 1rem;
+}
+
+li {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background-color: rgba(26, 95, 42, 0.2);
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-right: 100px; /* Espace pour la référence */
+}
+
+li:hover {
+    background-color: rgba(26, 95, 42, 0.4);
+    border-color: var(--border-color);
+    transform: translateX(5px);
+}
+
+.ref {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Styles responsifs */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .toc-header {
+        font-size: 1rem;
+    }
+
+    li {
+        font-size: 1.2rem;
+        padding: 0.6rem;
+        padding-right: 90px;
+    }
+
+    .ref {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animation de fade in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.toc-section {
+    animation: fadeIn 0.5s ease-out forwards;
+    animation-delay: calc(var(--animation-order) * 0.1s);
+    opacity: 0;
+}
+
+/* Ajout d'un effet de brillance sur les sections */
+.toc-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.toc-section:hover::before {
+    left: 100%;
+} 
